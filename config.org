@@ -316,18 +316,6 @@ speed keys in Org mode]].
 (setq org-highlight-latex-and-related '(latex script entities))
 #+END_SRC
 
-*** Display preferences
-
-I like to see an outline of pretty bullets instead of a list of asterisks.
-
-#+BEGIN_SRC emacs-lisp
-(add-hook 'org-mode-hook
-          (lambda ()
-            (org-bullets-mode t)))
-
-(setq org-hide-leading-stars t)
-#+END_SRC
-
 ** Org tags
 
 The default value is -77, which is weird for smaller width windows.
@@ -602,7 +590,18 @@ This package displays function signatures in the mode line.
 
 #+BEGIN_SRC emacs-lisp
 (use-package org-bullets
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'org-mode-hook #'org-bullets-mode)
+  (setq org-hide-leading-stars t))
+#+END_SRC
+
+** Magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
 #+END_SRC
 
 ** Perspective
